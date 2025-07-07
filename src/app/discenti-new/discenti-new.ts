@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { CommonModule }       from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
 import { Academy }  from '../services/academy';
 import { Discente }  from '../models/discente.model';
 
@@ -15,7 +15,7 @@ import { Discente }  from '../models/discente.model';
   selector: 'app-discenti-new',
   templateUrl: './discenti-new.html',
   styleUrls: ['./discenti-new.css'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterModule ]
 })
 export class DiscentiNew implements OnInit {
   /* ───────────── DI ───────────── */

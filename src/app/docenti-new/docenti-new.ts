@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { CommonModule }       from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
 import { Academy }  from '../services/academy';
 import { Docente }  from '../models/docente.model';
 
@@ -16,7 +16,7 @@ import { Docente }  from '../models/docente.model';
   selector: 'app-docenti-new',
   templateUrl: './docenti-new.html',
   styleUrls: ['./docenti-new.css'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterModule ]
 })
 export class DocentiNew implements OnInit {
   /* ───────────── DI ───────────── */

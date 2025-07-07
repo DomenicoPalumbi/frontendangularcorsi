@@ -13,6 +13,7 @@ import { Academy } from '../services/academy';
   imports: [CommonModule, RouterModule]
 })
 export class Docenti implements OnInit {
+  trackById(_: number, d: Docente) { return d.id; }
   docenti: Docente[] = [];          // 👉 tipizzato
   loading = true;
   error: string | null = null;

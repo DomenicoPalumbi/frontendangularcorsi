@@ -1,0 +1,62 @@
+<!-- docenti-new.html -->
+
+<form class="container mx-auto max-w-lg mt-8 p-6 bg-base-100 shadow-xl rounded-box"
+      [formGroup]="form"
+      (ngSubmit)="onSave()">
+
+  <h1 class="text-3xl font-semibold text-primary mb-6 text-center">
+    Nuovo Docente
+  </h1>
+
+  <!-- Nome -->
+  <div class="form-control mb-4">
+    <label for="nome" class="label">
+      <span class="label-text font-medium">Nome</span>
+    </label>
+    <input id="nome"
+           type="text"
+           class="input input-bordered w-full"
+           formControlName="nomeDocente" />
+    <p *ngIf="submitted && f.nomeDocente.invalid"
+       class="mt-1 text-error text-sm">
+      Il nome è obbligatorio
+    </p>
+  </div>
+
+  <!-- Cognome -->
+  <div class="form-control mb-4">
+    <label for="cognome" class="label">
+      <span class="label-text font-medium">Cognome</span>
+    </label>
+    <input id="cognome"
+           type="text"
+           class="input input-bordered w-full"
+           formControlName="cognomeDocente" />
+    <p *ngIf="submitted && f.cognomeDocente.invalid"
+       class="mt-1 text-error text-sm">
+      Il cognome è obbligatorio
+    </p>
+  </div>
+
+  <!-- Email -->
+  <div class="form-control mb-6">
+    <label for="email" class="label">
+      <span class="label-text font-medium">Email</span>
+    </label>
+    <input id="email"
+           type="email"
+           class="input input-bordered w-full"
+           formControlName="emailDocente" />
+    <p *ngIf="submitted && f.emailDocente.invalid"
+       class="mt-1 text-error text-sm">
+      Inserisci una email valida
+    </p>
+  </div>
+
+  <!-- Bottoni -->
+  <div class="flex justify-end gap-2">
+    <button type="submit" class="btn btn-primary">Salva</button>
+    <a routerLink="/docenti" class="btn btn-ghost">Annulla</a>
+  </div>
+
+</form>

@@ -1,0 +1,19 @@
+<!-- Canvas sopra, ma non dietro il body -->
+<section class="relative">
+ <canvas id="matrix-canvas"
+        class="fixed inset-0 w-full h-full pointer-events-none -z-10"></canvas>
+
+  <!-- Hero content -->
+  <div class="hero min-h-[70vh] bg-transparent text-center text-white relative z-10">
+    <div class="hero-content flex-col">
+      <h1 class="text-5xl font-bold">Benvenuto in Academy 2025</h1>
+      <p class="py-6 text-lg">Preparati a immergerti nella conoscenza.</p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a routerLink="/corsi"    class="btn btn-outline" routerLinkActive="btn-active">Corsi</a>
+        <a routerLink="/docenti"  class="btn btn-outline" routerLinkActive="btn-active">Docenti</a>
+        <a routerLink="/discenti" class="btn btn-outline" routerLinkActive="btn-active">Discenti</a>
+      </div>
+    </div>
+  </div>
+</section>

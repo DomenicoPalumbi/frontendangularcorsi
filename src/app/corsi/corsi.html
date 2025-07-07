@@ -1,0 +1,35 @@
+<!-- (navbar rimossa: qui puoi mettere <app-navbar></app-navbar> se necessario) -->
+<h2>Corsi OK</h2>
+<div class="container mt-4">
+  <h1 class="display-4 text-primary mb-4 text-center">Elenco Docenti</h1>
+
+  <a routerLink="/corsi/nuovo" class="btn btn-primary mb-3">
+    Nuovo Corso
+  </a>
+
+  <table class="table table-striped" *ngIf="corsi?.length; else noData">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Anno Accademico</th>
+        <th>Docente</th>
+        <th>Discenti</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of corsi">
+        <td>{{ c.id }}</td>
+        <td>{{ c.nome }}</td>
+        <td>{{ c.annoAccademico }}</td>
+        <td>{{ c.nomeDocente }} {{ c.cognomeDocente }}</td>
+        <td>{{ c.discenti }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <div class="alert alert-info">Nessun corso trovato.</div>
+  </ng-template>
+</div>
+

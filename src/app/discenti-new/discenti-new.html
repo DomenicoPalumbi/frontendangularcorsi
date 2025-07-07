@@ -1,0 +1,46 @@
+<!-- discenti-new.html -->
+
+<form class="container mx-auto max-w-lg mt-8 p-6 bg-base-100 shadow-xl rounded-box"
+      [formGroup]="form"
+      (ngSubmit)="onSave()">
+
+  <h1 class="text-3xl font-semibold text-primary mb-6 text-center">
+    Nuovo Discente
+  </h1>
+
+  <!-- Nome -->
+  <div class="form-control mb-4">
+    <label for="nome" class="label">
+      <span class="label-text font-medium">Nome</span>
+    </label>
+    <input id="nome"
+           type="text"
+           class="input input-bordered w-full"
+           formControlName="nomeDiscente" />
+    <p *ngIf="submitted && f.nomeDiscente.invalid"
+       class="mt-1 text-error text-sm">
+      Il nome è obbligatorio
+    </p>
+  </div>
+
+  <!-- Cognome -->
+  <div class="form-control mb-4">
+    <label for="cognome" class="label">
+      <span class="label-text font-medium">Cognome</span>
+    </label>
+    <input id="cognome"
+           type="text"
+           class="input input-bordered w-full"
+           formControlName="cognomeDiscente" />
+    <p *ngIf="submitted && f.cognomeDiscente.invalid"
+       class="mt-1 text-error text-sm">
+      Il cognome è obbligatorio
+    </p>
+  </div>
+  <!-- Bottoni -->
+  <div class="flex justify-end gap-2">
+    <button type="submit" class="btn btn-primary">Salva</button>
+    <a routerLink="/discenti" class="btn btn-ghost">Annulla</a>
+  </div>
+
+</form>

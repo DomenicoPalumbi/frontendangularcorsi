@@ -1,3 +1,8 @@
+<div class="max-w-xl mx-auto p-8 rounded-lg shadow-lg bg-base-100 space-y-6">
+  <!-- Titolo dinamico -->
+  <h2 class="text-2xl font-bold mb-4 text-center">
+    {{ isEdit ? 'Modifica Corso' : 'Nuovo Corso' }}
+  </h2>
 <form [formGroup]="form" (ngSubmit)="onSave()"
   class="max-w-xl mx-auto p-8 rounded-lg shadow-lg bg-base-100 space-y-6">
 

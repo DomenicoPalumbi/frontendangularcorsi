@@ -20,9 +20,9 @@ export class Academy {
   getDocente(id: number) {
   return this.http.get<Docente>(`${this.apiAuth}/docenti/${id}`);}
   getDiscenti(): Observable<Discente[]> { return this.http.get<Discente[]>( `${this.apiAuth}/discenti/lista` ); }
-  getDiscente(id: number) {
-  return this.http.get<Discente>(`${this.apiAuth}/discenti/${id}`);}
+  getDiscente(id: number) {return this.http.get<Discente>(`${this.apiAuth}/discenti/${id}`);}
   getCorsi():    Observable<Corso[]>    { return this.http.get<Corso[]>(    `${this.apiCorsi}/corsi/lista`   ); }
+  getCorso(id: number) {return this.http.get<Corso>(`${this.apiAuth}/corsi/${id}`);}
 
   /* ---------- CREATE -------- */
   createDocente(b: Docente):   Observable<Docente>  { return this.http.post<Docente>(  `${this.apiAuth}/docenti/nuovo`,   b); }

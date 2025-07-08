@@ -5,11 +5,27 @@ export const routes: Routes = [
   { path: '', component: Home },
 
   /* ──────────── Corsi ──────────── */
-  {
+ {
     path: 'corsi',
-    loadComponent: () =>
-      import('./corsi/corsi').then(m => m.Corsi)
+    children: [
+      {                                         // 1) lista  /docenti
+        path: '',
+        loadComponent: () =>
+          import('./corsi/corsi').then(m => m.Corsi)
+      },
+      {                                         // 2) nuovo  /docenti/nuovo
+        path: 'nuovo',
+        loadComponent: () =>
+          import('./corsi-new/corsi-new').then(m => m.CorsiNew)
+      },
+      {                                         // 3) modifica /docenti/:id
+        path: ':id',
+        loadComponent: () =>
+          import('./corsi-new/corsi-new').then(m => m.CorsiNew)
+      }
+    ]
   },
+
 
   /* ──────────── Docenti ──────────── */
   {

@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule }      from '@angular/common';
-import { RouterModule }      from '@angular/router';
-
-import { Navbar } from '../navbar/navbar';
-import { Footer } from '../footer/footer';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { Academy } from '../services/academy';
-import { Corso }   from '../models/corso.model';
+import { Corso } from '../models/corso.model';
 
 @Component({
   selector: 'app-corsi',
@@ -20,17 +17,43 @@ export class Corsi implements OnInit {
   loading = true;
   error: string | null = null;
 
-  constructor(private academy: Academy) {}
+  private academy = inject(Academy);
+  private router = inject(Router);
 
   ngOnInit(): void {
+    this.loadCorsi();
+  }
+
+  loadCorsi(): void {
     this.academy.getCorsi().subscribe({
-      next : (res: Corso[]) => {
-        this.corsi   = res;
+      next: (res: Corso[]) => {
+        this.corsi = res;
         this.loading = false;
       },
       error: (err: any) => {
-        this.error   = err.message;
+        this.error = err.message;
         this.loading = false;
+      }
+    });
+  }
+
+  /** Naviga al form di modifica del corso */
+  modifica(id: number): void {
+    this.router.navigate(['corsi', id]);
+    // es: /corsi/123
+  }
+
+  /** Elimina un corso e aggiorna la lista localmente */
+  elimina(id: number): void {
+    if (!confirm('Sei sicuro di voler eliminare questo corso?')) return;
+
+    this.academy.deleteCorso(id).subscribe({
+      next: () => {
+        this.corsi = this.corsi.filter(c => c.id !== id);
+      },
+      error: err => {
+        console.error(err);
+        alert('Errore durante l\'eliminazione del corso.');
       }
     });
   }

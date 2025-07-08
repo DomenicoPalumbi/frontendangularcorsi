@@ -1,35 +1,67 @@
-<!-- (navbar rimossa: qui puoi mettere <app-navbar></app-navbar> se necessario) -->
-<h2>Corsi OK</h2>
-<div class="container mt-4">
-  <h1 class="display-4 text-primary mb-4 text-center">Elenco Docenti</h1>
+<div class="container mx-auto mt-8 px-4">
+  <h1 class="text-3xl font-bold text-primary text-center mb-8">Elenco Corsi</h1>
 
-  <a routerLink="/corsi/nuovo" class="btn btn-primary mb-3">
-    Nuovo Corso
-  </a>
+  <div class="flex justify-end mb-6">
+    <a routerLink="/corsi/nuovo" class="btn btn-primary btn-sm">
+      + Nuovo Corso
+    </a>
+  </div>
 
-  <table class="table table-striped" *ngIf="corsi?.length; else noData">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Anno Accademico</th>
-        <th>Docente</th>
-        <th>Discenti</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let c of corsi">
-        <td>{{ c.id }}</td>
-        <td>{{ c.nome }}</td>
-        <td>{{ c.annoAccademico }}</td>
-        <td>{{ c.nomeDocente }} {{ c.cognomeDocente }}</td>
-        <td>{{ c.discenti }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="corsi?.length; else noData" class="overflow-x-auto">
+    <table class="table w-full table-zebra table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Anno</th>
+          <th>Docente</th>
+          <th>Discenti</th>
+          <th class="text-center">Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of corsi">
+          <td class="font-mono text-sm">{{ c.id }}</td>
+          <td class="font-semibold">{{ c.nome }}</td>
+          <td>{{ c.annoAccademico }}</td>
+          <td>{{ c.nomeDocente }} {{ c.cognomeDocente }}</td>
+          <td class="max-w-xs">
+            <ng-container *ngIf="c.discenti?.length; else noDiscenti">
+              <span *ngFor="let d of c.discenti; let last = last" class="inline-block">
+                {{ d.nomeDiscente }} {{ d.cognomeDiscente }}<span *ngIf="!last">, </span>
+              </span>
+            </ng-container>
+            <ng-template #noDiscenti>
+              <span class="italic text-gray-400">Nessun discente</span>
+            </ng-template>
+          </td>
+          <td class="text-center space-x-2">
+            <!-- Modifica -->
+            <button
+              (click)="modifica(c.id!)"
+              class="btn btn-success btn-xs hover:btn-success-focus"
+              aria-label="Modifica corso"
+              title="Modifica">
+              Modifica
+            </button>
+
+            <!-- Elimina -->
+            <button
+              (click)="elimina(c.id!)"
+              class="btn btn-error btn-xs hover:btn-error-focus"
+              aria-label="Elimina corso"
+              title="Elimina">
+              Elimina
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <ng-template #noData>
-    <div class="alert alert-info">Nessun corso trovato.</div>
+    <div class="alert alert-info mt-8 text-center">
+      Nessun corso trovato.
+    </div>
   </ng-template>
 </div>
-

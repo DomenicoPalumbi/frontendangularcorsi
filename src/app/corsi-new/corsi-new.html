@@ -1,0 +1,107 @@
+<form [formGroup]="form" (ngSubmit)="onSave()"
+  class="max-w-xl mx-auto p-8 rounded-lg shadow-lg bg-base-100 space-y-6">
+
+  <!-- Nome Corso -->
+  <div class="form-control w-full">
+    <label for="nome" class="label">
+      <span class="label-text font-semibold text-base-content">Nome Corso</span>
+    </label>
+    <input id="nome" type="text" formControlName="nome"
+      placeholder="Inserisci nome corso"
+      class="input input-bordered w-full focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:outline-none"
+      aria-describedby="nome-error" />
+    <p *ngIf="submitted && f.nome.invalid" id="nome-error"
+       class="text-sm mt-1 text-error" role="alert" aria-live="assertive">
+      Nome obbligatorio
+    </p>
+  </div>
+
+  <!-- Anno Accademico -->
+  <div class="form-control w-full">
+    <label for="annoAccademico" class="label">
+      <span class="label-text font-semibold text-base-content">Anno Accademico</span>
+    </label>
+    <input id="annoAccademico" type="number" formControlName="annoAccademico"
+      placeholder="Es. 2025" min="1900"
+      class="input input-bordered w-full focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:outline-none"
+      aria-describedby="anno-error" />
+    <p *ngIf="submitted && f.annoAccademico.invalid" id="anno-error"
+       class="text-sm mt-1 text-error" role="alert" aria-live="assertive">
+      Anno accademico obbligatorio e valido
+    </p>
+  </div>
+
+  <!-- Nome Docente -->
+  <div class="form-control w-full">
+    <label for="nomeDocente" class="label">
+      <span class="label-text font-semibold text-base-content">Nome Docente</span>
+    </label>
+    <select id="nomeDocente" formControlName="nomeDocente"
+      class="select select-bordered w-full focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:outline-none"
+      aria-describedby="nome-docente-error">
+      <option value="" disabled selected>Seleziona nome docente</option>
+      <option *ngFor="let d of docenti" [value]="d.nomeDocente">{{ d.nomeDocente }}</option>
+    </select>
+    <p *ngIf="submitted && f.nomeDocente.invalid" id="nome-docente-error"
+       class="text-sm mt-1 text-error" role="alert" aria-live="assertive">
+      Nome docente obbligatorio
+    </p>
+  </div>
+
+  <!-- Cognome Docente -->
+  <div class="form-control w-full">
+    <label for="cognomeDocente" class="label">
+      <span class="label-text font-semibold text-base-content">Cognome Docente</span>
+    </label>
+    <select id="cognomeDocente" formControlName="cognomeDocente"
+      class="select select-bordered w-full focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:outline-none"
+      aria-describedby="cognome-docente-error">
+      <option value="" disabled selected>Seleziona cognome docente</option>
+      <option *ngFor="let d of docenti" [value]="d.cognomeDocente">{{ d.cognomeDocente }}</option>
+    </select>
+    <p *ngIf="submitted && f.cognomeDocente.invalid" id="cognome-docente-error"
+       class="text-sm mt-1 text-error" role="alert" aria-live="assertive">
+      Cognome docente obbligatorio
+    </p>
+  </div>
+
+  <!-- Selezione multipla Discenti -->
+  <div class="form-control w-full">
+    <label class="label">
+      <span class="label-text font-semibold text-base-content">Discenti</span>
+    </label>
+    <div class="flex flex-wrap gap-2 max-h-48 overflow-y-auto p-3 border border-base-300 rounded-md bg-base-200">
+      <button
+        type="button"
+        *ngFor="let discente of discenti"
+        (click)="onToggleDiscente(discente)"
+        [class.font-bold]="isDiscenteSelected(discente)"
+        [class.bg-primary]="isDiscenteSelected(discente)"
+        [class.text-primary-content]="isDiscenteSelected(discente)"
+        class="btn btn-outline btn-sm transition-colors duration-150"
+        [attr.aria-pressed]="isDiscenteSelected(discente)"
+      >
+        {{ discente.nomeDiscente }} {{ discente.cognomeDiscente }}
+      </button>
+    </div>
+    <p *ngIf="submitted && f.discenti.invalid"
+       class="text-sm mt-1 text-error" role="alert" aria-live="assertive">
+      Seleziona almeno un discente.
+    </p>
+  </div>
+
+  <!-- Bottone Submit -->
+  <div class="form-control w-full flex gap-4">
+  <button type="submit"
+    class="btn btn-primary flex-grow py-3 font-semibold
+           hover:bg-primary-focus focus:ring-4 focus:ring-primary-focus focus:ring-opacity-50">
+    Salva Corso
+  </button>
+
+  <button type="button" routerLink="/corsi"
+    class="btn btn-outline flex-grow py-3 font-semibold
+           hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 focus:ring-opacity-50">
+    Annulla
+  </button>
+</div>
+</form>

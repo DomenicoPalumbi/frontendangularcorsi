@@ -6,5 +6,5 @@ export interface Corso{
     annoAccademico : number;
     nomeDocente: string;
     cognomeDocente : string;
-    discenti :string;
+    discenti : Discente[];
 }

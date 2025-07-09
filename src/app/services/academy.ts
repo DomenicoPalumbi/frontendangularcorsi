@@ -1,4 +1,3 @@
-// src/app/core/academy.ts
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Docente }  from '../models/docente.model';
 import { Discente } from '../models/discente.model';
 import { Corso }    from '../models/corso.model';
+
 
 @Injectable({ providedIn: 'root' })
 export class Academy {

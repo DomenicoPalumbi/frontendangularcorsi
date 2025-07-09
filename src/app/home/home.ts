@@ -46,7 +46,38 @@ export class Home implements AfterViewInit, OnDestroy {
       this.drops = Array(cols).fill(1);
     };
 
-    const draw = () => {
+   const draw = () => {
+  // Sfuma leggermente lo sfondo per lasciare una scia
+  this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // più alto per una scia meno persistente
+  this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  this.ctx.font = `${this.fontSize}px monospace`;
+
+  this.drops.forEach((y, i) => {
+    // Colore casuale per ogni simbolo ad ogni frame
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    this.ctx.fillStyle = `rgb(${r},${g},${b})`;
+
+    // Simbolo casuale
+    const text = this.letters[Math.floor(Math.random() * this.letters.length)];
+
+    // Disegna simbolo alla posizione corrente
+    this.ctx.fillText(text, i * this.fontSize, y * this.fontSize);
+
+    // Aggiorna posizione y per far scorrere verso il basso
+    if (y * this.fontSize > canvas.height && Math.random() > 0.975) {
+      this.drops[i] = 0;
+    } else {
+      this.drops[i] = y + 1;
+    }
+  });
+
+  this.animationId = requestAnimationFrame(draw);
+};
+
+ /*const draw = () => {
       this.ctx.fillStyle = 'rgba(0,0,0,0.05)';
       this.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -62,6 +93,7 @@ export class Home implements AfterViewInit, OnDestroy {
 
       this.animationId = requestAnimationFrame(draw);
     };
+*/
 
     init();
     draw();

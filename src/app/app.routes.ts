@@ -1,8 +1,18 @@
 import { Routes } from '@angular/router';
 import { Home } from './home/home';
+import { MorpheusPillsComponent } from './morpheuspillscomponent/morpheuspillscomponent';
 
 export const routes: Routes = [
-  { path: '', component: Home },
+  { path: '', component: MorpheusPillsComponent },
+  {
+    path: 'home',
+    children: [
+      {                                         // 1) lista  /docenti
+        path: '',
+        loadComponent: () =>
+          import('./home/home').then(m => m.Home)
+      },]
+  },
 
   /* ──────────── Corsi ──────────── */
  {
@@ -70,6 +80,11 @@ export const routes: Routes = [
       }
     ]
   },
+  /* ──────────── Morpheus ──────────── */
+  {
+  path: 'morpheus',
+  loadComponent: () => import('./morpheuspillscomponent/morpheuspillscomponent').then(m => m.MorpheusPillsComponent)
+},
   /* ──────────── Fallback ──────────── */
   { path: '**', redirectTo: '' }
 ];
